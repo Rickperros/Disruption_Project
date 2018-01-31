@@ -7,3 +7,4 @@ Per utilitzar el repositori:
 -INSISTEIXO NOMES UNA SOLA PERSONA HA D'EDITAR UN FITXER.
 
 -Documenteu be el que afegiu als push.
+-Thanks for reading
