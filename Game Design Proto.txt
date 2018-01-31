@@ -1,0 +1,43 @@
+Plot
+
+The New Gaia is now an old planet destroyed by the overpopulation. 
+The City expands along and across the world ruled by the council. 
+You are the first unit of the RO-OP, a new series of militar droids who are sent to disconnect certains areas of the world in order to accomplish the purge. 
+
+Game Loop
+
+Enter a stage -> find the power supplies -> Go to them -> Disconnect people
+
+Game Goals
+
+-Long term: Purge certain areas in order to save the world.
+-Long-Mid: Find the voice.
+-Mid-Term: Disconnect the new power supply.
+-Mid-Short: Find certain person.
+-Short-Term: Find a power connection in order to avoid running out of battery.
+
+Game Mechanics
+
+-Shoot People to open the way.
+-Trap people to open the way.
+-Try to not kill people in order to get better stats.
+-Acces the system to get the area info.
+-Acces connections to increase your battery.
+
+
+Expanded Mechanics
+
+-Entering through someones electric system will show information about the
+ people who lived in it and show that they are dead now.
+
+-Before disconnecting the main power supply or kill some subjects, there will
+ be a dialog where player is moraly questioned.
+
+-When a power supply is disconnected all of the deads will be shown as lights
+ turning off or something like that.
+
+-Player cannot lose life, only battery.
+
+-Enemies will try to make players movement slower in order to kill him.
+
+-You can't recharge on the same spot twice.
