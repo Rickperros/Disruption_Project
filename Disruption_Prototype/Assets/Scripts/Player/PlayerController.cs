@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
    // [SerializeField] private string m_eventId;
  
     private CharacterController m_characterController;
+
     //private GameEvent m_event;
 
     #region Monobehaivour Methods
