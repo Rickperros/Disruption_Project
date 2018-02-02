@@ -39,6 +39,7 @@ namespace Steerings
         public EFacingPolicy m_facingPolicy;
         public float m_maxPredictionTime;
         public Vector3 m_targetLinearVelocity;
+        public Transform m_target;
     }
 
     public struct SEvadeParameters

@@ -7,7 +7,7 @@ namespace Steerings
     {
         protected KinematicState m_ownKS;
 
-        protected static GameObject SURROGATE_TARGET = null;
+        protected static Transform SURROGATE_TARGET = null;
         protected static SteeringOutput NULL_STEERING;
 
         protected virtual void Awake()
@@ -16,8 +16,8 @@ namespace Steerings
 
             if (SURROGATE_TARGET == null)
             {
-                SURROGATE_TARGET = new GameObject("surrogate target");
-                SURROGATE_TARGET.AddComponent<KinematicState>();
+                SURROGATE_TARGET = new GameObject("surrogate target").transform;
+                SURROGATE_TARGET.gameObject.AddComponent<KinematicState>();
             }
 
             if (NULL_STEERING == null)
