@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class VelocityMatching : SteeringBehaviour
     {
-        private SVelocityMatchingParameters m_info;
+        private SVelocityMatching m_info;
         
-        public void SetInfo(SVelocityMatchingParameters info)
+        public void SetInfo(SVelocityMatching info)
         {
             m_info = info;
         }
@@ -27,7 +27,7 @@ namespace Steerings
             return l_result;
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SVelocityMatchingParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SVelocityMatching info)
         {
             if (info.m_targetLinearVelocity == null)
                 return NULL_STEERING;

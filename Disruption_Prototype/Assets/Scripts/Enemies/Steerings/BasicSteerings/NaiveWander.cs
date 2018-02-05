@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class NaiveWander : SteeringBehaviour
     {
-        private SNaiveWanderParameters m_info;
+        private SNaiveWander m_info;
 
-        public void SetInfo(SNaiveWanderParameters info)
+        public void SetInfo(SNaiveWander info)
         {
             m_info = info;
         }
@@ -23,7 +23,7 @@ namespace Steerings
             return NaiveWander.GetSteering(m_ownKS, m_info);
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SNaiveWanderParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SNaiveWander info)
         {
             ownKS.m_orientation += info.m_wanderRate * MathExtent.Binomial();
 

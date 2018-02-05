@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class Face : SteeringBehaviour
     {
-        private SAlignParameters m_info;
+        private SAlign m_info;
 
-        public void SetInfo(SAlignParameters info)
+        public void SetInfo(SAlign info)
         {
             m_info = info;
         }
@@ -25,7 +25,7 @@ namespace Steerings
             return Face.GetSteering(m_ownKS, m_info);
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SAlignParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SAlign info)
         {
             SURROGATE_TARGET.rotation = Quaternion.Euler(SURROGATE_TARGET.eulerAngles.x, MathExtent.VectorToAngle(info.m_target.position - ownKS.m_position), SURROGATE_TARGET.eulerAngles.z);
             info.m_target = SURROGATE_TARGET;

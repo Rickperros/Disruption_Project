@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class Evade : SteeringBehaviour
     {
-        private SEvadeParameters m_info;
+        private SEvade m_info;
 
-        public void SetInfo(SEvadeParameters info)
+        public void SetInfo(SEvade info)
         {
             m_info = info;
         }
@@ -28,7 +28,7 @@ namespace Steerings
             return l_result;
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SEvadeParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SEvade info)
         {
             if (info.m_targetLinearVelocity == null)
                 return NULL_STEERING;

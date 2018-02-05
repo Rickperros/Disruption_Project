@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class Arrive : SteeringBehaviour
     {
-        private SArriveParameters m_info;
+        private SArrive m_info;
 
-        public void SetInfo(SArriveParameters info)
+        public void SetInfo(SArrive info)
         {
             m_info = info;
         }
@@ -29,7 +29,7 @@ namespace Steerings
             return result;
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SArriveParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SArrive info)
         {
             Vector3 l_distanceToTarget = info.m_target.position - ownKS.m_position;
 

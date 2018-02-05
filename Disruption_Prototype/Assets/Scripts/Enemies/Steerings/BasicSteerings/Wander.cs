@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class Wander : SteeringBehaviour
     {
-        private SWanderParameters m_info;
+        private SWander m_info;
 
-        public void SetInfo(SWanderParameters info)
+        public void SetInfo(SWander info)
         {
             m_info = info;
         }
@@ -29,7 +29,7 @@ namespace Steerings
             return result;
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, ref SWanderParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, ref SWander info)
         {
             info.m_targetOrientation += info.m_wanderRate * MathExtent.Binomial();
             SURROGATE_TARGET.transform.position = MathExtent.AngleToVector(info.m_targetOrientation) * info.m_wanderRadius;

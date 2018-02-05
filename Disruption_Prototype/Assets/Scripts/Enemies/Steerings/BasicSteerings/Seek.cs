@@ -4,9 +4,9 @@ namespace Steerings
 {
     public class Seek : SteeringBehaviour
     {
-        private SSeekParameters m_info;
+        private SSeek m_info;
 
-        public void SetInfo(SSeekParameters info)
+        public void SetInfo(SSeek info)
         {
             m_info = info;
         }

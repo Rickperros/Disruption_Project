@@ -5,9 +5,9 @@ namespace Steerings
 {
     public class Intercept : SteeringBehaviour
     {
-        private SInterceptParameters m_info;
+        private SIntercept m_info;
 
-        public void SetInfo(SInterceptParameters info)
+        public void SetInfo(SIntercept info)
         {
             m_info = info;
         }
@@ -28,7 +28,7 @@ namespace Steerings
             return l_result;
         }
 
-        public static SteeringOutput GetSteering(KinematicState ownKS, SInterceptParameters info)
+        public static SteeringOutput GetSteering(KinematicState ownKS, SIntercept info)
         {
             if (info.m_targetLinearVelocity == null)
                 return NULL_STEERING;

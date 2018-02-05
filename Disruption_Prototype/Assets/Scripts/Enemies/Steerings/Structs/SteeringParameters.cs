@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace Steerings
 {
     public enum EFacingPolicy { LWYG, LWYGI, FT, FTI, NONE };
 
-    public struct SSeekParameters
+    public struct SSeek
     {
         public EFacingPolicy m_facingPolicy;
         public Transform m_target;
     }
 
-    public struct SArriveParameters
+    public struct SArrive
     {
         public EFacingPolicy m_facingPolicy;
         public Transform m_target;
@@ -19,14 +20,14 @@ namespace Steerings
         public float m_timeToDesiredSpeed;
     }
 
-    public struct SVelocityMatchingParameters
+    public struct SVelocityMatching
     {
         public EFacingPolicy m_facingPolicy;
         public Vector3 m_targetLinearVelocity;
         public float m_timeToDesiredVelocity;
     }
 
-    public struct SAlignParameters
+    public struct SAlign
     {
         public Transform m_target;
         public float m_closeEnoughAngle;
@@ -34,7 +35,7 @@ namespace Steerings
         public float m_timeToDesiredAngularSpeed;
     }
 
-    public struct SInterceptParameters
+    public struct SIntercept
     {
         public EFacingPolicy m_facingPolicy;
         public float m_maxPredictionTime;
@@ -42,7 +43,7 @@ namespace Steerings
         public Transform m_target;
     }
 
-    public struct SEvadeParameters
+    public struct SEvade
     {
         public EFacingPolicy m_facingPolicy;
         public float m_maxPredictionTime;
@@ -50,13 +51,13 @@ namespace Steerings
         public Transform m_target;
     }
 
-    public struct SNaiveWanderParameters
+    public struct SNaiveWander
     {
         public EFacingPolicy m_facingPolicy;
         public float m_wanderRate;
     }
 
-    public struct SWanderParameters
+    public struct SWander
     {
         public EFacingPolicy m_facingPolicy;
         public float m_wanderRate;
@@ -65,14 +66,14 @@ namespace Steerings
         public float m_targetOrientation;
     }
 
-    public struct SSingleWhiskerObstacleAvoidanceParameters
+    public struct SSimpleObstacleAvoidance
     {
         public EFacingPolicy m_facingPolicy;
         public float m_whiskerLenght;
         public float m_avoidDistance;
     }
 
-    public struct SMultipleWhiskerObstacleAvoidanceParameters
+    public struct SObstacleAvoidance
     {
         public EFacingPolicy m_facingPolicy;
         public float m_primaryWhiskerLenght;
@@ -81,10 +82,19 @@ namespace Steerings
         public float m_secondaryWhiskerAngle;
     }
 
-    public struct SWanderAroundParameters
+    public struct SKeepPosition
     {
-        public float m_seekWeight;
+        public EFacingPolicy m_facingPolicy;
+        public Transform m_target;
+        public float m_requiredDistance;
+        public float m_requiredAngle;
     }
 
-
+    public struct SPathFollowing
+    {
+        public EFacingPolicy m_facingPolicy;
+        public float m_closeEnoughRadius;
+        public int m_currentWaypointIndex;
+        public List<Transform> m_path;
+    }
 }
