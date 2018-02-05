@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Intercept : SteeringBehaviour
     {
-        SInterceptParameters m_info;
+        private SInterceptParameters m_info;
 
         public void SetInfo(SInterceptParameters info)
         {

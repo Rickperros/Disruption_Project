@@ -58,7 +58,7 @@ namespace Utils
         /// <summary>
         /// Returns a random value between -1 to 1
         /// </summary>
-        public static float binomial()
+        public static float Binomial()
         {
             return Random.value - Random.value;
         }

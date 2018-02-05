@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Align : SteeringBehaviour
     {
-        SAlignParameters m_info;
+        private SAlignParameters m_info;
 
         public void SetInfo(SAlignParameters info)
         {
@@ -22,8 +22,7 @@ namespace Steerings
 
         protected override SteeringOutput GetSteering()
         {
-            SteeringOutput result = Align.GetSteering(m_ownKS, m_info);
-            return result;
+            return Align.GetSteering(m_ownKS, m_info);
         }
 
         public static SteeringOutput GetSteering(KinematicState ownKS, SAlignParameters info)
