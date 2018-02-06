@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace Steerings
 {
+    [RequireComponent(typeof(KinematicState))]
     public class SteeringBehaviour : MonoBehaviour
     {
+        public SAlign m_alignInfo;
         protected KinematicState m_ownKS;
 
         protected static Transform SURROGATE_TARGET = null;
         protected static SteeringOutput NULL_STEERING;
+
 
         protected virtual void Awake()
         {
@@ -61,7 +64,7 @@ namespace Steerings
                 m_ownKS.m_angularSpeed = MathExtent.Clip(m_ownKS.m_angularSpeed, m_ownKS.m_maxAngularSpeed, true);
 
                 m_ownKS.m_orientation += m_ownKS.m_angularSpeed * dt + 0.5f * l_steering.m_angularAcceleration * dt * dt;
-                transform.rotation = Quaternion.Euler(0f, 0f, m_ownKS.m_orientation);
+                transform.rotation = Quaternion.Euler(0f, m_ownKS.m_orientation, 0f);
             }
             else
                 m_ownKS.m_angularSpeed = 0f;
@@ -87,9 +90,10 @@ namespace Steerings
             if (m_ownKS.m_linearVelocity.magnitude > 0.001f)
             {
                 SURROGATE_TARGET.transform.rotation = Quaternion.Euler(0, MathExtent.VectorToAngle(m_ownKS.m_linearVelocity), 0);
-                //SteeringOutput st = Align.GetSteering(m_ownKS, SURROGATE_TARGET);
-                //steering.m_angularAcceleration = st.m_angularAcceleration;
-                //steering.m_angularActive = st.m_angularActive;
+                m_alignInfo.m_target = SURROGATE_TARGET;
+                SteeringOutput st = Align.GetSteering(m_ownKS, m_alignInfo);
+                steering.m_angularAcceleration = st.m_angularAcceleration;
+                steering.m_angularActive = st.m_angularActive;
             }
             else
                 steering.m_angularActive = false;
@@ -107,9 +111,10 @@ namespace Steerings
 
         public virtual void ApplyFT(SteeringOutput steering, GameObject target)
         {
-            //SteeringOutput st = Face.GetSteering(m_ownKS, target);
-            //steering.m_angularAcceleration = st.m_angularAcceleration;
-            //steering.m_angularActive = st.m_angularActive;
+            m_alignInfo.m_target = target.transform;
+            SteeringOutput st = Face.GetSteering(m_ownKS, m_alignInfo);
+            steering.m_angularAcceleration = st.m_angularAcceleration;
+            steering.m_angularActive = st.m_angularActive;
         }
 
         public virtual void ApplyFacingPolicy(EFacingPolicy rotationalPolicy, SteeringOutput steering, GameObject target = null)

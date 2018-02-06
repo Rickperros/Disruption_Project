@@ -2,9 +2,9 @@
 {
     public class ArrivePlusAvoid : SteeringBehaviour
     {
-        private SArrive m_arriveInfo;
-        private SObstacleAvoidance m_obstacleAvoidanceInfo;
-        private bool obstacleAvoided;
+        public SArrive m_arriveInfo;
+        public SObstacleAvoidance m_obstacleAvoidanceInfo;
+        public bool obstacleAvoided;
 
         public void SetInfo(SArrive arrive, SObstacleAvoidance obstacleAvoidance)
         {

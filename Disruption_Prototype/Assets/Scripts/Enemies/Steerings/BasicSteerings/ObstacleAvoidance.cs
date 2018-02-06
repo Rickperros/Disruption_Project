@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class ObstacleAvoidance : SteeringBehaviour
     {
-        private SObstacleAvoidance m_info;
+        public SObstacleAvoidance m_info;
 
         public void SetInfo(SObstacleAvoidance info)
         {
@@ -16,8 +16,8 @@ namespace Steerings
         {
             m_info.m_facingPolicy = facingPolicy;
             m_info.m_primaryWhiskerLenght = whiskerLenght;
-            m_info.m_secondaryWhiskerAngle = secondaryWhiskerAngle;
-            m_info.m_secondaryWhiskerRatio = ratioSecondaryWhisker;
+            m_info.m_AngleSecondWhisk = secondaryWhiskerAngle;
+            m_info.m_RatioSecondWhisk = ratioSecondaryWhisker;
         }
 
         protected override SteeringOutput GetSteering()
@@ -39,17 +39,17 @@ namespace Steerings
                 return Seek.GetSteering(ownKS, SURROGATE_TARGET);
             }
 
-            l_ray = new Ray(ownKS.m_position, MathExtent.AngleToVector(MathExtent.VectorToAngle(ownKS.m_linearVelocity.normalized) + info.m_secondaryWhiskerAngle));
+            l_ray = new Ray(ownKS.m_position, MathExtent.AngleToVector(MathExtent.VectorToAngle(ownKS.m_linearVelocity.normalized) + info.m_AngleSecondWhisk));
 
-            if(Physics.Raycast(l_ray, out l_hitInfo, info.m_primaryWhiskerLenght * info.m_secondaryWhiskerRatio))
+            if(Physics.Raycast(l_ray, out l_hitInfo, info.m_primaryWhiskerLenght * info.m_RatioSecondWhisk))
             {
                 SURROGATE_TARGET.position = l_hitInfo.point + l_hitInfo.normal * info.m_avoidDistance;
                 return Seek.GetSteering(ownKS, SURROGATE_TARGET);
             }
 
-            l_ray = new Ray(ownKS.m_position, MathExtent.AngleToVector(MathExtent.VectorToAngle(ownKS.m_linearVelocity.normalized) - info.m_secondaryWhiskerAngle));
+            l_ray = new Ray(ownKS.m_position, MathExtent.AngleToVector(MathExtent.VectorToAngle(ownKS.m_linearVelocity.normalized) - info.m_AngleSecondWhisk));
 
-            if (Physics.Raycast(l_ray, out l_hitInfo, info.m_primaryWhiskerLenght * info.m_secondaryWhiskerRatio))
+            if (Physics.Raycast(l_ray, out l_hitInfo, info.m_primaryWhiskerLenght * info.m_RatioSecondWhisk))
             {
                 SURROGATE_TARGET.position = l_hitInfo.point + l_hitInfo.normal * info.m_avoidDistance;
                 return Seek.GetSteering(ownKS, SURROGATE_TARGET);

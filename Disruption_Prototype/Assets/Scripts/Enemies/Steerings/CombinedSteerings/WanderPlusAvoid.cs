@@ -4,9 +4,9 @@ namespace Steerings
 {
     public class WanderPlusAvoid : SteeringBehaviour
     {
-        private SWander m_wanderInfo;
-        private SObstacleAvoidance m_obstacleAvoidanceInfo;
-        private bool obstacleAvoided;
+        public SWander m_wanderInfo;
+        public SObstacleAvoidance m_obstacleAvoidanceInfo;
+        public bool obstacleAvoided;
 
         public void SetInfo(SWander wander, SObstacleAvoidance obstacleAvoidance)
         {

@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Face : SteeringBehaviour
     {
-        private SAlign m_info;
+        public SAlign m_info;
 
         public void SetInfo(SAlign info)
         {

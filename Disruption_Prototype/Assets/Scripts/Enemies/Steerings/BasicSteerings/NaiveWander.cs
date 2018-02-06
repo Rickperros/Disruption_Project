@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class NaiveWander : SteeringBehaviour
     {
-        private SNaiveWander m_info;
+        public SNaiveWander m_info;
 
         public void SetInfo(SNaiveWander info)
         {

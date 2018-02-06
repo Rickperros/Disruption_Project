@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class PathFollowing : SteeringBehaviour
     {
-        private SPathFollowing m_info;
+        public SPathFollowing m_info;
 
         public void SetInfo(SPathFollowing info)
         {

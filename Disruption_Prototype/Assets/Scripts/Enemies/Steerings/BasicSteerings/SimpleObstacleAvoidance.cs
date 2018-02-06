@@ -4,7 +4,7 @@ namespace Steerings
 {
     public class SimpleObstacleAvoidance : SteeringBehaviour
     {
-        private SSimpleObstacleAvoidance m_info;
+        public SSimpleObstacleAvoidance m_info;
 
         public void SetInfo(SSimpleObstacleAvoidance info)
         {

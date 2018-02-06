@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Evade : SteeringBehaviour
     {
-        private SEvade m_info;
+        public SEvade m_info;
 
         public void SetInfo(SEvade info)
         {

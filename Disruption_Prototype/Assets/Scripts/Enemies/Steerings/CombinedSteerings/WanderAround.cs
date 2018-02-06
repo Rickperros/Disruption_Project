@@ -4,9 +4,9 @@ namespace Steerings
 {
     public class WanderAround : SteeringBehaviour
     {
-        private float m_seekWeight;
-        private SWander m_wanderInfo;
-        private SSeek m_seekInfo;
+        public float m_seekWeight;
+        public SWander m_wanderInfo;
+        public SSeek m_seekInfo;
 
         public void SetInfo(float seekWeight, SWander wanderInfo, SSeek seekInfo)
         {

@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class VelocityMatching : SteeringBehaviour
     {
-        private SVelocityMatching m_info;
+        public SVelocityMatching m_info;
         
         public void SetInfo(SVelocityMatching info)
         {

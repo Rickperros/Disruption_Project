@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Arrive : SteeringBehaviour
     {
-        private SArrive m_info;
+        public SArrive m_info;
 
         public void SetInfo(SArrive info)
         {

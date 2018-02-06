@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Wander : SteeringBehaviour
     {
-        private SWander m_info;
+        public SWander m_info;
 
         public void SetInfo(SWander info)
         {

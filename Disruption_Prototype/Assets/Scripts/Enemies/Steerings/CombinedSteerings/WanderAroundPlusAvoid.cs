@@ -5,11 +5,11 @@ namespace Steerings
     public class WanderAroundPlusAvoid : SteeringBehaviour
     {
 
-        private float m_seekWeight;
-        private SWander m_wanderInfo;
-        private SSeek m_seekInfo;
-        private SObstacleAvoidance m_obstacleAvoidanceInfo;
-        private bool obstacleAvoided;
+        public float m_seekWeight;
+        public SWander m_wanderInfo;
+        public SSeek m_seekInfo;
+        public SObstacleAvoidance m_obstacleAvoidanceInfo;
+        public bool obstacleAvoided;
 
         public void SetInfo(float seekWeight, SWander wander, SObstacleAvoidance obstacleAvoidance, SSeek seekInfo)
         {

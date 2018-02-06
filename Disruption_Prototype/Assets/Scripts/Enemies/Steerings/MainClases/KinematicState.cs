@@ -22,4 +22,10 @@ public class KinematicState : MonoBehaviour
     public Vector3 m_linearVelocity = Vector3.zero;
 
     #endregion
+
+    private void Start()
+    {
+        m_position = transform.position;
+        m_orientation = transform.eulerAngles.y;
+    }
 }

@@ -5,8 +5,8 @@ namespace Steerings
 {
     public class KeepPosition : SteeringBehaviour
     {
-        private SKeepPosition m_keepPositioninfo;
-        private SArrive m_arriveInfo;
+        public SKeepPosition m_keepPositioninfo;
+        public SArrive m_arriveInfo;
 
         public void SetInfo(SKeepPosition info, SArrive arriveInfo)
         {
@@ -31,7 +31,8 @@ namespace Steerings
 
             finalTargetPosition *= info.m_requiredDistance; 
 
-            SURROGATE_TARGET.position = info.m_target.position + finalTargetPosition; 
+            SURROGATE_TARGET.position = info.m_target.position + finalTargetPosition;
+            arriveInfo.m_target = SURROGATE_TARGET;
 
             return Arrive.GetSteering(me, arriveInfo); 
         }

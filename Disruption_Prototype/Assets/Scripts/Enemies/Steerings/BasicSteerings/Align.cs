@@ -5,7 +5,7 @@ namespace Steerings
 {
     public class Align : SteeringBehaviour
     {
-        private SAlign m_info;
+        public SAlign m_info;
 
         public void SetInfo(SAlign info)
         {

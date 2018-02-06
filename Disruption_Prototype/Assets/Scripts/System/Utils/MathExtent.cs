@@ -49,7 +49,7 @@ namespace Utils
         /// </summary>
         public static Vector3 Clip(Vector3 current, float max)
         {
-            if (current.magnitude < max)
+            if (current.magnitude > max)
                 return current.normalized * max;
             else
                 return current;
