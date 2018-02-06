@@ -2,10 +2,10 @@
 {
     public interface IFSMState
     {
-        void Enter();
-
+        void Init();
+        void OnEnter();
         void Update();
-
-        void Exit();
+        void ChangeState();
+        void OnExit();
     }
 }

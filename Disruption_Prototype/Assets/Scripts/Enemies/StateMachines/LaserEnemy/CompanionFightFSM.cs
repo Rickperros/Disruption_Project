@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IHFSMachine : MonoBehaviour {
+public class CompanionFightFSM : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
