@@ -101,11 +101,10 @@ namespace Steerings
 
         public virtual void ApplyFTI(SteeringOutput steering, GameObject target)
         {
-            if (m_ownKS.m_linearVelocity.magnitude > 0.001f)
-            {
-                transform.rotation = Quaternion.Euler(0, MathExtent.VectorToAngle(target.transform.position - m_ownKS.m_position), 0);
-                m_ownKS.m_orientation = transform.rotation.eulerAngles.y;
-            }
+
+            transform.rotation = Quaternion.Euler(0, MathExtent.VectorToAngle(target.transform.position - m_ownKS.m_position) -90f, 0);
+            m_ownKS.m_orientation = transform.rotation.eulerAngles.y;
+            
             steering.m_angularActive = false;
         }
 

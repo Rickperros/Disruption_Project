@@ -63,6 +63,18 @@ namespace Utils
             return Random.value - Random.value;
         }
 
+        /// <summary>
+        /// Returns true if current is between min an max
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public static bool IsInRange(float current, float min, float max = Mathf.Infinity)
+        {
+            return current >= min && current <= max;
+        }
+
         private static float ClipAngle(float currentAngle, float maxAngle)
         {
             if (Mathf.Abs(currentAngle) > maxAngle)
@@ -71,5 +83,6 @@ namespace Utils
                 return currentAngle;
         }
 
+        
     }
 }
