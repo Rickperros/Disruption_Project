@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ISkill : MonoBehaviour {
+public interface ISkill {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Init(PlayerBlackboard blackboard);
+
+    void UseSkill();
+
+    void OnTriggerEnter(Collider other);
+
+    void OnTriggerStay(Collider other);
+
+    void OnTriggerExit(Collider other);
+
+    void OnControllerCOlliderHit(ControllerColliderHit hit);
+
+    void DeInit();
 }

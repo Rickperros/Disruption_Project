@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/PruebasAI.unity
+- path: Assets/Scenes/Prototype_base_v0.1.unity
   isLoaded: 1
   isActive: 1

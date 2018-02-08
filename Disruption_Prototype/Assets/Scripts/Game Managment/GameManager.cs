@@ -4,9 +4,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour //Obsolete!!
 {
     [SerializeField] private int m_playerBulletsPoolSize;
+    [SerializeField] private int m_playerGrenadesPoolSize;
     [SerializeField] private GameObject m_playerBulletPrefab;
+    [SerializeField] private GameObject m_playerGrenadePrefab;
+
 
     private GameObjectPool m_playerBullets;
+    private GameObjectPool m_playerGrenades;
 
     private static GameManager m_instance;
     private EGameStates m_currentGameState = EGameStates.NONE;
@@ -19,6 +23,8 @@ public class GameManager : MonoBehaviour //Obsolete!!
             m_instance = this;
 
         SetPlayerBulletsPool();
+        SetPlayerGrenadesPool();
+
     }
 
     private void Start()
@@ -63,7 +69,7 @@ public class GameManager : MonoBehaviour //Obsolete!!
     {
         m_currentGameState = EGameStates.GAME_OVER;
     }
-    
+
     public void StopGame(string nextScene)
     {
         LoadScene(nextScene);
@@ -108,6 +114,17 @@ public class GameManager : MonoBehaviour //Obsolete!!
         return l_bulletObject.GetComponent<Bullet>();
     }
 
+
+    //Afegit
+    public Grenade GetPlayerGrenade()
+    {
+        GameObject l_GrenadeObject = m_playerGrenades.RequireObject();
+        l_GrenadeObject.SetActive(true);
+
+        return l_GrenadeObject.GetComponent<Grenade>();
+    }
+
+
     #endregion
 
     #region Editor Functions
@@ -121,7 +138,15 @@ public class GameManager : MonoBehaviour //Obsolete!!
         m_playerBullets = new GameObjectPool(m_playerBulletPrefab, m_playerBulletsPoolSize, "Player Bullets Pool");
     }
 
-    #endif
+    public void SetPlayerGrenadesPool()
+    {
+        if (m_playerGrenades != null)
+            m_playerGrenades.ClearPool();
+        m_playerGrenades = new GameObjectPool(m_playerGrenadePrefab, m_playerGrenadesPoolSize, "Player Grenades Pool");
+    }
+
+
+#endif
     #endregion
 
     #region Static functions

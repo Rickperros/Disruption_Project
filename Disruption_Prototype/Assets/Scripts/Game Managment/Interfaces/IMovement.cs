@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IMovement : MonoBehaviour {
+public interface IMovement
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Init(PlayerBlackboard blackboard);
+
+    void TryToMove();
+
+    void OnTriggerEnter(Collider other);
+
+    void OnTriggerStay(Collider other);
+
+    void OnTriggerExit(Collider other);
+
+    void OnControllerCOlliderHit(ControllerColliderHit hit);
+
+    void DeInit();
+
+
 }

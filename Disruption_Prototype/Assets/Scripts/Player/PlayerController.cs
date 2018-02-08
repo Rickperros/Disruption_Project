@@ -14,33 +14,59 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
    // [SerializeField] private string m_eventId;
  
     private CharacterController m_characterController;
-
     //private GameEvent m_event;
+
+    //Afegit
+    private bool l_dashing = false; //evita el movement
+    private float l_timeDashing = 0;
+    [SerializeField] private float l_timeDashingLimit = 2;
+    private Vector3 l_dashDirection = Vector3.zero;
+
+    public IMovement m_MovementType;
+    public ISkill m_Skill;
+    public IWeapon m_weapon;
+    private PlayerBlackboard blackboard;
 
     #region Monobehaivour Methods
 
-    private void Awake()
-    {
-        m_characterController = GetComponent<CharacterController>();
-    }
-
     private void Start()
     {
-        //m_event = LevelManager.GetInstance().GetGameEvent(m_eventId);
+        m_characterController = GetComponent<CharacterController>();
+        blackboard = GetComponent<PlayerBlackboard>();
+        m_MovementType = blackboard.m_MoveNormal;
+        m_MovementType.Init(blackboard);
+
+        m_Skill = blackboard.m_SkillDash;
+        m_Skill.Init(blackboard);
+
+        m_weapon = blackboard.m_weaponGrenade;
+        //m_weapon.Init(blackboard);
+
+
     }
+
+
     private void Update()
     {
         if(GameManager.GetInstance().IsGamePlaying())
         {
-            if(m_battery.IsUseful())
+
+
+            if (m_battery.IsUseful())
             {
-                MovePlayer();
+                m_MovementType.TryToMove();
+                m_Skill.UseSkill();
                 Shoot();
                 ReleaseTrap();
                 ConsumeBattery(m_batteryConstantConsumption * Time.deltaTime);
                 PauseGame();
             }
 
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                m_MovementType = blackboard.m_MoveHit;
+                m_MovementType.Init(blackboard);
+            }
             DebugFullFill();
             // DebugRecharge();
         }
@@ -65,6 +91,15 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
         if(other.tag == "Goal Point")
         {
             GameManager.GetInstance().StopGame();
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            blackboard.m_MoveHit.l_enemyForward = collision.gameObject.transform.forward;
+            m_MovementType = blackboard.m_MoveHit;
         }
     }
     #endregion
@@ -92,8 +127,16 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
 
         Bullet l_bullet = GameManager.GetInstance().GetPlayerBullet();
 
+        RaycastHit l_hitInfo;
+        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out l_hitInfo, 8))
+        {
+            Vector3 direction = l_hitInfo.point - transform.position;
+            direction.y = 0;
+            l_bullet.SetDirection(direction.normalized);
+        }
+
         l_bullet.transform.position = transform.position;
-        l_bullet.SetDirection(Vector3.right);
+
         l_bullet.gameObject.SetActive(true);
 
         ConsumeBattery(m_shootConsumption);
@@ -106,6 +149,7 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
             return;
 
         Debug.Log("Trap");
+        //ThrowGrenade();
         ConsumeBattery(m_shootConsumption);
     }
 
@@ -148,28 +192,28 @@ public class PlayerController : MonoBehaviour //OBSOLETE!!! PROTO Version
         if (Input.GetKeyDown(KeyCode.P))
             GameManager.GetInstance().ResumeGame();
     }
+
+   
+
+    private void ThrowGrenade()
+    {
+        if (!(Input.GetMouseButton(1) && m_shootClock.CheckTimer()) && !Input.GetMouseButtonDown(1))
+            return;
+        m_weapon.Init(blackboard);
+
+        Grenade l_grenadeThrown = GameManager.GetInstance().GetPlayerGrenade();
+
+        l_grenadeThrown.l_myGrenade.transform.position = transform.position;
+        l_grenadeThrown.GrenadeThrown(transform.forward);
+        l_grenadeThrown.l_myGrenade.SetActive(true);
+        
+        ConsumeBattery(m_shootConsumption);
+        m_shootClock.ForceUpdate();
+    }
     #endregion
 
     #region Debug methods
 
-    public void PrintString()
-    {
-        Debug.Log("Event Start");
-    }
-    public void PrintString2()
-    {
-        Debug.Log("Event End");
-    }
-   /* private void DebugEndEvent()
-    {
-        if(Input.GetKeyDown(KeyCode.Q))
-            m_event.EndGameEvent((GameEvent.OnLoopGameEvent) PrintString2);
-    }
-    private void StartEvent()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-            m_event.InitGameEvent(PrintString);
-    }*/
     private void DebugFullFill()
     {
         if (Input.GetKeyDown(KeyCode.F))

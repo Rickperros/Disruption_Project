@@ -53,7 +53,7 @@ public class FightFSM : MonoBehaviour, IFSMState
                 break;
             case EStates.COMPANION_FIGHT:
 
-                if(m_blackboard.m_companion == null || m_blackboard.m_companion.Equals(null))
+                if(m_blackboard.m_companion == null || m_blackboard.m_companion.Equals(null) || !m_blackboard.m_companion.gameObject.activeInHierarchy)
                 {
                     m_nextState = EStates.SOLO_FIGHT;
                     ChangeState();
@@ -62,7 +62,7 @@ public class FightFSM : MonoBehaviour, IFSMState
                 break;
             case EStates.SOLO_FIGHT:
 
-                if (m_blackboard.m_companion != null && !m_blackboard.m_companion.Equals(null))
+                if (m_blackboard.m_companion != null && !m_blackboard.m_companion.Equals(null) && m_blackboard.m_companion.gameObject.activeInHierarchy)
                 {
                     m_nextState = EStates.COMPANION_FIGHT;
                     ChangeState();
