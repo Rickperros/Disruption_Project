@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerHitMovement : IMovement
 {
@@ -14,7 +12,7 @@ public class PlayerHitMovement : IMovement
 
     private Timer l_hitTimer;
 
-    void IMovement.Init(PlayerBlackboard blackboard)
+    public void Init(PlayerBlackboard blackboard)
     {
         m_playerBlackboard = blackboard;
         m_characterController = blackboard.m_characterController;
@@ -27,38 +25,37 @@ public class PlayerHitMovement : IMovement
         l_timePush = 0;
     }
 
-    void  IMovement.TryToMove()
+    public void  TryToMove()
     {
         l_timePush += Time.deltaTime;
         if (l_timePush <= l_timePushLimit)
         {
-            Debug.Log("PlayerHit and moving away");
             m_characterController.Move(l_enemyForward * m_playerBlackboard.m_hitPushValue * Time.deltaTime);
         } else
         {
-            m_playerController.m_MovementType = m_playerBlackboard.m_MoveNormal;
-            m_playerController.m_MovementType.Init(m_playerBlackboard);
+            m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_normalMove;
+            m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
         }
     }
 
 
-    void IMovement.DeInit()
+    public void DeInit()
     {
     }
 
-    void IMovement.OnControllerCOlliderHit(ControllerColliderHit hit)
+    public void OnControllerCOlliderHit(ControllerColliderHit hit)
     {
     }
 
-    void IMovement.OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
     }
 
-    void IMovement.OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
     }
 
-    void IMovement.OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
     {
     }
 

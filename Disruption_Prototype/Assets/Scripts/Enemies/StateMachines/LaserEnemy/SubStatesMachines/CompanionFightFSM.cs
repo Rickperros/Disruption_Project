@@ -1,18 +1,16 @@
-﻿using Utils;
-using Steerings;
+﻿using Steerings;
 using UnityEngine;
 using StateMachines;
-using System;
 
 [RequireComponent(typeof(LaserEnemyBlackboard))]
-[RequireComponent(typeof(KeepPosition))]
+[RequireComponent(typeof(KeepPositionPlusAvoidObstacles))]
 public class CompanionFightFSM : MonoBehaviour, IFSMState
 {
     public enum EState { INITIAL, HOLD_BARRIER, DASH }
 
     private LaserEnemyBlackboard m_blackboard;
     private LineRenderer m_laser;
-    private KeepPosition m_steering;
+    private KeepPositionPlusAvoidObstacles m_steering;
 
     private EState m_currentState;
     private EState m_nextState;
@@ -25,7 +23,7 @@ public class CompanionFightFSM : MonoBehaviour, IFSMState
 
         m_blackboard = GetComponent<LaserEnemyBlackboard>();
         m_laser = GetComponent<LineRenderer>();
-        m_steering = GetComponent<KeepPosition>();
+        m_steering = GetComponent<KeepPositionPlusAvoidObstacles>();
 
         m_laser.enabled = false;
         m_steering.enabled = false;
@@ -110,8 +108,8 @@ public class CompanionFightFSM : MonoBehaviour, IFSMState
                 m_laser.enabled = true;
                 m_steering.enabled = true;
                 m_steering.m_useArrive = true;
-                m_steering.m_keepPositioninfo.m_requiredAngle = m_blackboard.m_companionFightHoldAngle;
-                m_steering.m_keepPositioninfo.m_requiredDistance = m_blackboard.m_companionFightDistance;
+                m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_companionFightHoldAngle;
+                m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_companionFightDistance;
                 m_attackTimer.ForceUpdate();
                 break;
             case EState.DASH:
@@ -120,8 +118,8 @@ public class CompanionFightFSM : MonoBehaviour, IFSMState
                 m_laser.enabled = true;
                 m_steering.enabled = true;
                 m_steering.m_useArrive = true;
-                m_steering.m_keepPositioninfo.m_requiredAngle = m_blackboard.m_companionFightAttackAngle;
-                m_steering.m_keepPositioninfo.m_requiredDistance = m_blackboard.m_companionFightDistance;
+                m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_companionFightAttackAngle;
+                m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_companionFightDistance;
                 m_postAttackTimer.ForceUpdate();
                 break;
         }

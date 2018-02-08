@@ -16,7 +16,7 @@ public class PlayerDashing : IMovement
     private Vector3 l_endPostion;
 
 
-    void IMovement.Init(PlayerBlackboard blackboard)
+    public void Init(PlayerBlackboard blackboard)
     {
         m_playerBlackboard = blackboard;
         m_characterController = blackboard.m_characterController;
@@ -73,8 +73,8 @@ public class PlayerDashing : IMovement
         else
         {
             m_playerBlackboard.m_PlayerDashing = false;
-            m_playerController.m_MovementType = m_playerBlackboard.m_MoveNormal;
-            m_playerController.m_MovementType.Init(m_playerBlackboard);
+            m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_normalMove;
+            m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
         }
 
 

@@ -5,13 +5,13 @@ using StateMachines;
 
 
 [RequireComponent(typeof(LaserEnemyBlackboard))]
-[RequireComponent(typeof(KeepPosition))]
+[RequireComponent(typeof(KeepPositionPlusAvoidObstacles))]
 public class SoloFightFSM : MonoBehaviour, IFSMState
 {
     public enum EState {INITIAL, KEEP_POSITION, SHOOT}
 
     private LaserEnemyBlackboard m_blackboard;
-    private KeepPosition m_steering;
+    private KeepPositionPlusAvoidObstacles m_steering;
 
     private EState m_currentState;
     private EState m_nextState;
@@ -19,7 +19,7 @@ public class SoloFightFSM : MonoBehaviour, IFSMState
 
     public void Awake()
     {
-        m_steering = GetComponent<KeepPosition>();
+        m_steering = GetComponent<KeepPositionPlusAvoidObstacles>();
         m_blackboard = GetComponent<LaserEnemyBlackboard>();
 
         m_currentState = EState.INITIAL;
@@ -98,14 +98,14 @@ public class SoloFightFSM : MonoBehaviour, IFSMState
 
                 m_steering.enabled = true;
                 m_steering.m_useArrive = true;
-                m_steering.m_keepPositioninfo.m_requiredDistance = m_blackboard.m_soloDistanceToPlayer;
-                m_steering.m_keepPositioninfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
+                m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_soloDistanceToPlayer;
+                m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
                 break;
             case EState.SHOOT:
 
                 m_steering.enabled = true;
-                m_steering.m_keepPositioninfo.m_requiredDistance = m_blackboard.m_soloAttackDistanceToPlayer;
-                m_steering.m_keepPositioninfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
+                m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_soloAttackDistanceToPlayer;
+                m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
                 break;
         }
 

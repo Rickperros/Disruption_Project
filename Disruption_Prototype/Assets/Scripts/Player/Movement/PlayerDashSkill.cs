@@ -14,7 +14,7 @@ public class PlayerDashSkill : ISkill
         m_playerBlackboard = blackboard;
         m_characterController = blackboard.m_characterController;
         m_playerController = blackboard.m_playerController;
-        movement = blackboard.m_MoveDashing;
+        movement = blackboard.m_dashMove;
     }
 
 
@@ -22,11 +22,11 @@ public class PlayerDashSkill : ISkill
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) && !m_playerBlackboard.m_PlayerDashing)
         {
-            if (m_playerController.m_MovementType != null)
-                m_playerController.m_MovementType.DeInit();
+            if (m_playerBlackboard.m_currentMovementType != null)
+                m_playerBlackboard.m_currentMovementType.DeInit();
 
-            m_playerController.m_MovementType = m_playerBlackboard.m_MoveDashing;
-            m_playerController.m_MovementType.Init(m_playerBlackboard);
+            m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_dashMove;
+            m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
         }
 
     }

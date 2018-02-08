@@ -19,12 +19,13 @@ namespace Steerings
 
         public static SteeringOutput GetSteering(KinematicState ownKS, SKeepPosition keepPositionInfo, SObstacleAvoidance avoidObstacles, SArrive arriveInfo, bool useArrive)
         {
-            SteeringOutput result = useArrive ? KeepPosition.GetSteering(ownKS, keepPositionInfo, arriveInfo) : KeepPosition.GetSteering(ownKS, keepPositionInfo);
+            SteeringOutput result = ObstacleAvoidance.GetSteering(ownKS, avoidObstacles);
 
             if (result != NULL_STEERING)
                 return result;
 
-            result = ObstacleAvoidance.GetSteering(ownKS, avoidObstacles);
+            result = useArrive ? KeepPosition.GetSteering(ownKS, keepPositionInfo, arriveInfo) : KeepPosition.GetSteering(ownKS, keepPositionInfo);
+           
             return result;
         }
     }
