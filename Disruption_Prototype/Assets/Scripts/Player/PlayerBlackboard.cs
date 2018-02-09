@@ -7,7 +7,8 @@ public class PlayerBlackboard : MonoBehaviour
     public float m_speed = 3f;
     public float m_gravity = -2;
     public Vector3 m_movementDirection;
-   
+    public bool m_usingSkill;
+
     //laser gun vars
     public float m_laserGunCoolDown;
     public float m_shootBatteryConsumption = 2f;
@@ -17,7 +18,7 @@ public class PlayerBlackboard : MonoBehaviour
     public float m_TrapBatteryConsumption = 5f;
 
     //Variables
-    public bool m_PlayerDashing; 
+    public bool m_PlayerDashing = false; 
     public float l_dashVelocity = 0.1f;
     public float m_hitPushValue = 1;
 
@@ -52,10 +53,10 @@ public class PlayerBlackboard : MonoBehaviour
         m_laserGun = new LaserGun();
 
         m_normalMove.Init(this);
-        m_dashMove.Init(this);
-        m_dashSkill.Init(this);
         m_hitMove.Init(this);
         m_laserGun.Init(this);
+
+        m_dashSkill.Init(this);
 
         m_currentPrimaryWeapon = m_laserGun;
         m_currentMovementType = m_normalMove;

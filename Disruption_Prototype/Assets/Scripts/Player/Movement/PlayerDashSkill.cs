@@ -1,58 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerDashSkill : ISkill
 {
     private CharacterController m_characterController;
     private PlayerBlackboard m_playerBlackboard;
     private PlayerController m_playerController;
-    private IMovement movement;
+
+    private float l_timeDashing = 0;
+    private float l_timeDashingLimit = 0.5f;
+
+    public void DeInit()
+    {
+    }
 
     public void Init(PlayerBlackboard blackboard)
     {
         m_playerBlackboard = blackboard;
         m_characterController = blackboard.m_characterController;
         m_playerController = blackboard.m_playerController;
-        movement = blackboard.m_dashMove;
+        l_timeDashing = 0;
+
     }
 
-
-    public void UseSkill()
+    public void OnEnd()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !m_playerBlackboard.m_PlayerDashing)
-        {
-            if (m_playerBlackboard.m_currentMovementType != null)
-                m_playerBlackboard.m_currentMovementType.DeInit();
+        m_playerBlackboard.m_usingSkill = false;
+        l_timeDashing = 0f;
 
-            m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_dashMove;
-            m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
-        }
+        if (m_playerBlackboard.m_currentMovementType != null || !m_playerBlackboard.m_currentMovementType.Equals(null))
+            m_playerBlackboard.m_currentMovementType.DeInit();
 
+        m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_normalMove;
+        m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
     }
 
-
-
-    public void DeInit()
+    public void OnUse()
     {
 
+        if (l_timeDashing < l_timeDashingLimit && m_playerBlackboard.m_PlayerDashing)
+            l_timeDashing += Time.deltaTime;
+        else
+            OnEnd();
     }
 
-    public void OnControllerCOlliderHit(ControllerColliderHit hit)
+    public bool TryToStart()
     {
+        if (!Input.GetKeyDown(KeyCode.Space) || m_playerBlackboard.m_PlayerDashing)
+            return false;
+
+        if (m_playerBlackboard.m_currentMovementType != null || !m_playerBlackboard.m_currentMovementType.Equals(null))
+            m_playerBlackboard.m_currentMovementType.DeInit();
+
+        m_playerBlackboard.m_currentMovementType = m_playerBlackboard.m_dashMove;
+        m_playerBlackboard.m_currentMovementType.Init(m_playerBlackboard);
+
+        return true;
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-    }
-
-    public void OnTriggerStay(Collider other)
-    {
-    }
-
-
 }

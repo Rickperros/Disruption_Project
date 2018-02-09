@@ -625,17 +625,17 @@ MonoBehaviour:
     m_maxCapacity: 100
   m_batteryConstantConsumption: 5
   m_speed: 3
-  m_shootConsumption: 2
-  m_TrapConsumption: 5
-  m_movementSpeed: 4
+  m_gravity: -2
   m_movementDirection: {x: 0, y: 0, z: 0}
+  m_laserGunCoolDown: 0.15
+  m_shootBatteryConsumption: 2
+  m_grenadeLauncherCoolDown: 0
+  m_TrapBatteryConsumption: 5
+  m_PlayerDashing: 0
+  l_dashVelocity: 1
+  m_hitPushValue: 1
   m_characterController: {fileID: 0}
   m_playerController: {fileID: 0}
-  m_GravityScale: -2
-  m_laserGunCoolDown: 0.15
-  m_PlayerDashing: 0
-  l_dashVelocity: 0.32
-  m_hitPushValue: 1
 --- !u!143 &439431731
 CharacterController:
   m_ObjectHideFlags: 0

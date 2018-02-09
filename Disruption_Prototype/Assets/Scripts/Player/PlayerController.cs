@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         m_blackboard = GetComponent<PlayerBlackboard>();
+        m_blackboard.m_usingSkill = false;
     }
 
     private void Update()
@@ -19,7 +20,14 @@ public class PlayerController : MonoBehaviour
             if (m_blackboard.m_battery.IsUseful())
             {
                 m_blackboard.m_currentMovementType.TryToMove();
-                m_blackboard.m_currentSkill.UseSkill();
+
+                if (!m_blackboard.m_usingSkill)
+                    m_blackboard.m_usingSkill = m_blackboard.m_currentSkill.TryToStart();
+                else
+                    m_blackboard.m_currentSkill.OnUse();
+
+                Debug.Log(m_blackboard.m_usingSkill);
+
                 m_blackboard.m_currentPrimaryWeapon.UseWeapon();
                 ConsumeBattery(m_blackboard.m_batteryConstantConsumption * Time.deltaTime);
                 PauseGame();
@@ -59,21 +67,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Public Methods
-
-    public float GetCurrentBatteryCapacity()
-    {
-        return m_blackboard.m_battery.GetCurrentCapacity();
-    }
-
-    public float GetMaxBatteryCapacity()
-    {
-        return m_blackboard.m_battery.GetMaxCapacity();
-    }
-
-    #endregion
-
-    #region Private Methods
+   #region Private Methods
 
     private void TryToRecharge(RechargePoint rechargePoint)
     {
