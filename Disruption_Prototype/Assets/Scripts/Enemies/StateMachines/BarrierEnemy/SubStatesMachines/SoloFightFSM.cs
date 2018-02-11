@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Steerings;
-using Utils;
 using StateMachines;
 
 
@@ -8,7 +7,7 @@ using StateMachines;
 [RequireComponent(typeof(KeepPositionPlusAvoidObstacles))]
 public class SoloFightFSM : MonoBehaviour, IFSMState
 {
-    public enum EState {INITIAL, KEEP_POSITION, SHOOT}
+    public enum EState {INITIAL, KEEP_POSITION}
 
     private LaserEnemyBlackboard m_blackboard;
     private KeepPositionPlusAvoidObstacles m_steering;
@@ -52,23 +51,6 @@ public class SoloFightFSM : MonoBehaviour, IFSMState
                 ChangeState();
                 break;
             case EState.KEEP_POSITION:
-                if(m_attackTimer.CheckTimer())
-                {
-                    m_nextState = EState.SHOOT;
-                    ChangeState();
-                    break;
-                }
-                break;
-            case EState.SHOOT:
-
-                if(MathExtent.IsInRange(Vector3.Distance(transform.position, m_blackboard.m_player.position), m_blackboard.m_soloAttackDistanceToPlayer))
-                {
-                    Shoot();
-                    m_nextState = EState.KEEP_POSITION;
-                    ChangeState();
-                    break;
-                }
-
                 break;
         }
     }
@@ -82,9 +64,6 @@ public class SoloFightFSM : MonoBehaviour, IFSMState
                 break;
             case EState.KEEP_POSITION:
                 m_steering.m_useArrive = false;
-                m_steering.enabled = false;
-                    break;
-            case EState.SHOOT:
                 m_steering.enabled = false;
                 break;
         }
@@ -101,30 +80,10 @@ public class SoloFightFSM : MonoBehaviour, IFSMState
                 m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_soloDistanceToPlayer;
                 m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
                 break;
-            case EState.SHOOT:
-
-                m_steering.enabled = true;
-                m_steering.m_keepPositionInfo.m_requiredDistance = m_blackboard.m_soloAttackDistanceToPlayer;
-                m_steering.m_keepPositionInfo.m_requiredAngle = m_blackboard.m_soloAngleToPlayer;
-                break;
         }
 
         m_currentState = m_nextState;
     }
 
-    private void Shoot()
-    {
-        Ray l_ray = new Ray(transform.position, transform.forward);
-        Debug.DrawRay(transform.position, transform.forward, Color.red, 3f);
-        RaycastHit l_hitInfo;
-
-        if(Physics.Raycast(l_ray, out l_hitInfo))
-        {
-            if(l_hitInfo.collider.tag == "Player")
-            {
-                Debug.Log("DIE");
-            }
-        }
-    }
 }
 

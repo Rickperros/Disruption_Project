@@ -109,4 +109,16 @@ namespace Steerings
         public int m_currentWaypointIndex;
         public List<Transform> m_path;
     }
+
+    [System.Serializable]
+    public struct SInterpose
+    {
+        public EFacingPolicy m_facingPolicy;
+        public Transform m_target;
+        public Transform m_coveredObject;
+        [Range(0, 1)]
+        [Tooltip("Range between 0, 1 meaning 0 the point to cover and 1 the target position")]
+        public float m_distanceToInterpose;
+
+    }
 }

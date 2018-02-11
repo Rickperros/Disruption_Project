@@ -27,7 +27,7 @@ namespace Steerings
 
         public static SteeringOutput GetSteering(KinematicState ownKS, SAlign info)
         {
-            SURROGATE_TARGET.rotation = Quaternion.Euler(SURROGATE_TARGET.eulerAngles.x, MathExtent.VectorToAngle(info.m_target.position - ownKS.m_position), SURROGATE_TARGET.eulerAngles.z);
+            SURROGATE_TARGET.rotation = Quaternion.Euler(0f, MathExtent.VectorToAngle(info.m_target.position - ownKS.m_position), 0f);
             info.m_target = SURROGATE_TARGET;
 
             return Align.GetSteering(ownKS, info);

@@ -21,11 +21,18 @@ public class KinematicState : MonoBehaviour
     public Vector3 m_position = Vector3.zero;
     public Vector3 m_linearVelocity = Vector3.zero;
 
+    public float m_stoppedPrecision = 0.001f;
+
     #endregion
 
     private void Start()
     {
         m_position = transform.position;
         m_orientation = transform.eulerAngles.y;
+    }
+
+    public bool IsStopped()
+    {
+        return Mathf.Abs(m_linearVelocity.magnitude) <= m_stoppedPrecision;
     }
 }

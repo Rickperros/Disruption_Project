@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
                 else
                     m_blackboard.m_currentSkill.OnUse();
 
-                Debug.Log(m_blackboard.m_usingSkill);
-
                 m_blackboard.m_currentPrimaryWeapon.UseWeapon();
                 ConsumeBattery(m_blackboard.m_batteryConstantConsumption * Time.deltaTime);
                 PauseGame();

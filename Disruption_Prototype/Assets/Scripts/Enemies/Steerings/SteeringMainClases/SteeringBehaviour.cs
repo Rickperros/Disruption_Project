@@ -3,19 +3,23 @@ using UnityEngine;
 
 namespace Steerings
 {
+    [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(KinematicState))]
     public class SteeringBehaviour : MonoBehaviour
     {
         public SAlign m_alignInfo;
+        public bool m_ignoreHeight = true;
         protected KinematicState m_ownKS;
 
         protected static Transform SURROGATE_TARGET = null;
         protected static SteeringOutput NULL_STEERING;
 
+        protected CharacterController m_characterController;
 
         protected virtual void Awake()
         {
             m_ownKS = GetComponent<KinematicState>();
+            m_characterController = GetComponent<CharacterController>();
 
             if (SURROGATE_TARGET == null)
             {
@@ -48,11 +52,14 @@ namespace Steerings
             //Apply linear accelerations
             if (l_steering.m_linearActive)
             {
+                if (m_ignoreHeight)
+                    l_steering.m_linearAcceleration.y = 0f;
+
                 m_ownKS.m_linearVelocity = m_ownKS.m_linearVelocity + l_steering.m_linearAcceleration * dt;
                 m_ownKS.m_linearVelocity = MathExtent.Clip(m_ownKS.m_linearVelocity, m_ownKS.m_maxLinearSpeed);
 
+                m_characterController.Move(m_ownKS.m_linearVelocity * dt + 0.5f * l_steering.m_linearAcceleration * dt * dt);
                 m_ownKS.m_position += m_ownKS.m_linearVelocity * dt + 0.5f * l_steering.m_linearAcceleration * dt * dt;
-                transform.position = m_ownKS.m_position;
             }
             else
                 m_ownKS.m_linearVelocity = Vector3.zero;
@@ -68,6 +75,7 @@ namespace Steerings
             }
             else
                 m_ownKS.m_angularSpeed = 0f;
+
         }
 
         protected virtual SteeringOutput GetSteering()
