@@ -2001,7 +2001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1447511808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2672,7 +2672,7 @@ MonoBehaviour:
     m_closeEnoughAngle: 0
     m_slowDownAngle: 0
     m_timeToDesiredAngularSpeed: 0
-  m_ignoreHeight: 0
+  m_ignoreHeight: 1
   m_interposeInfo:
     m_facingPolicy: 3
     m_target: {fileID: 439431729}
@@ -2700,7 +2700,7 @@ MonoBehaviour:
     m_closeEnoughAngle: 0
     m_slowDownAngle: 0
     m_timeToDesiredAngularSpeed: 0
-  m_ignoreHeight: 0
+  m_ignoreHeight: 1
   m_info:
     m_facingPolicy: 1
     m_target: {fileID: 255376492}
@@ -2720,11 +2720,11 @@ MonoBehaviour:
     m_closeEnoughAngle: 0
     m_slowDownAngle: 0
     m_timeToDesiredAngularSpeed: 0
-  m_ignoreHeight: 0
+  m_ignoreHeight: 1
   m_seekWeight: 0.6
   m_wanderInfo:
     m_facingPolicy: 1
-    m_wanderRate: 2
+    m_wanderRate: 1
     m_wanderRadius: 1
     m_wanderOffset: 3
     m_targetOrientation: 0
@@ -2883,8 +2883,8 @@ MonoBehaviour:
   m_wanderAnchor: {fileID: 1183984521}
   m_GuardPoint: {fileID: 1183984521}
   m_lastPlayerPos: {fileID: 255376492}
-  m_alertRadius: 8
-  m_attackRadius: 5
+  m_alertRadius: 6
+  m_attackRadius: 4
   m_closeEnoughRadius: 1
   m_attackCooldown: 5
 --- !u!1001 &1767389240
@@ -2957,7 +2957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1854858918
 MonoBehaviour:
   m_ObjectHideFlags: 0
